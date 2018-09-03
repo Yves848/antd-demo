@@ -5,10 +5,12 @@
 }
 
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.logo {
+  height: 82px;
+  background: rgba(214, 30, 30, 0.2);
+  margin: 16px;
 }
+
 
 .App-header {
   background-color: #222;

@@ -5,6 +5,7 @@ import "./App.css";
 import { Layout,Menu } from "antd";
 import Login from "./components/Login/Login";
 import Plats from "./components/Plats/Plats";
+import logo from './assets/images/icon.png'
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -45,8 +46,10 @@ class App extends Component {
                 left: 0
               }}
             >
-              <div className="logo" />
-              <Menu theme="dark" mode="inline">
+              <div className="logo">
+                <img style={{height: 80}} src={logo} alt=""/>
+              </div>
+              <Menu>
                 <Login userLogin={this.userLoggedIn} />
               </Menu>
             </Sider>

@@ -31,6 +31,10 @@ class Login extends Component {
     });
   }
 
+  onItemHover = () => {
+
+  }
+
   componentDidMount() {
       
   }
@@ -38,9 +42,9 @@ class Login extends Component {
   render() {
 
      return( this.state.users.map((user,i) => {
-      console.log('user',user)
+      //console.log('user',user)
         return (
-          <Menu.Item key={i} onClick={()=>this.props.userLogin(user)}>
+          <Menu.Item style={{height: 32}} key={i} onClick={()=>this.props.userLogin(user)} onItemHover={this.onItemHover}>
             <Icon type="user" />
             <span className="nav-text">{user.Nom}</span>
           </Menu.Item>

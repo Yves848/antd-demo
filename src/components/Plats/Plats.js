@@ -3,7 +3,7 @@ import { db } from "../../libs/firebase";
 import Aux from '../../hoc/_Aux'
 
 import Plat from './Plat/Plat'
-
+import { List, Card } from 'antd';
 class Plats extends Component {
     constructor(props){
         super(props)
@@ -48,11 +48,19 @@ class Plats extends Component {
     render() { 
         return (  
            <Aux>
-               {this.state.plats.map((plat) => {
-                   //console.log(plat)
-                 return (<Plat key={plat.Key} plat={plat}></Plat>)
-                 })
-               }
+            <List
+                grid={{gutter: 16, column:4}}
+                dataSource={this.state.plats}
+                renderItem={item => (
+                    <List.Item>
+                        <Card title={item.Nom}
+                        cover={<img alt={item.ImageSearch} src={item.Image}></img>}>
+
+                        </Card>
+                    </List.Item>
+                )}>
+
+            </List> 
            </Aux> 
         );
     }
