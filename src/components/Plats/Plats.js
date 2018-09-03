@@ -12,10 +12,11 @@ class Plats extends Component {
             plats: []
         }
         this.dbPlat = null;
-        this.mountdb(this.props.user);
+        //this.mountdb(this.props.user);
     }
 
     mountdb = (user) => {
+        console.log('[PLATS]','mountdb')
         this.dbPlat = db.ref().child("Plats/"+user);
 
         this.dbPlat.on("child_added", snapshot => {
@@ -26,42 +27,60 @@ class Plats extends Component {
                 return {plats : [...prevState.plats, 
                                 {
                                     Key: key,
-                                    Nom: snap.Nom,
+                                    ...snap
+                                   /*  Nom: snap.Nom,
                                     Categorie: snap.Categorie,
                                     Image: snap.Image,
                                     ImageSearch: snap.ImageSearch,
-                                    Rating: snap.Rating
+                                    Rating: snap.Rating */
                                 }]} 
             }) 
-          });
-
+        });
+        console.log('[PLATS]','mountdb => out')
     }
+
+    componentDidMount() {
+        //console.log('[PLATS] componentDidMount' )
+        
+    }
+
+    componentWillMount() {
+        //console.log('[PLATS] componentWillMount' )
+        this.setState({plats: []})
+        this.mountdb(this.props.user)
+    }
+
+    componentWillUnmount() {
+        //console.log('[PLATS] componentWillUnmount' )
+        this.dbPlat = null;
+    }
+
+    
     componentDidUpdate(prevProps) {
-        //console.log('prevProps.user',prevProps.user)
-        //console.log('props.user',this.props.user)
-        if (prevProps.user !== this.props.user) {
-            this.setState({plats: []})
-            this.mountdb(this.props.user)
+        console.log('[PLATS]','componentDidUpdate',prevProps.user,this.props.user)
+        if (prevProps.user.Nom !== this.props.user.Nom) {
+            console.log('[PLATS]','componentDidUpdate',prevProps.user,this.props.user)
+            
         }
     }
 
     render() { 
         return (  
-           <Aux>
-            <List
-                grid={{gutter: 16, column:4}}
-                dataSource={this.state.plats}
-                renderItem={item => (
-                    <List.Item>
-                        <Card title={item.Nom}
-                        cover={<img alt={item.ImageSearch} src={item.Image}></img>}>
+        <Aux>
+        <List
+            grid={{gutter: 16, column:4}}
+            dataSource={this.state.plats}
+            renderItem={item => (
+                <List.Item>
+                    <Card title={item.Nom}
+                    cover={<img alt={item.ImageSearch} src={item.Image}></img>}>
 
-                        </Card>
-                    </List.Item>
-                )}>
+                    </Card>
+                </List.Item>
+            )}>
 
-            </List> 
-           </Aux> 
+        </List> 
+        </Aux> 
         );
     }
 }
