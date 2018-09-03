@@ -13,7 +13,7 @@ class Plat extends Component {
         //console.log('plat',plat)
         return (  
             <div>
-                <h2>{plat.Nom}</h2>
+                <p>{plat.Nom}</p>
             </div>
         );
     }

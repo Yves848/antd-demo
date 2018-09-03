@@ -51,31 +51,32 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Sider
-            style={{
-              overflow: 'auto',
-              height: '100vh',
-              position: 'fixed',
-              left: 0,
-            }}
+            breakpoint='md'
+            collapsible
+            
+            collapsedWidth="0"
+            onBreakpoint={(broken)=>{console.log(broken)}}
+            onCollapse={(collapsed,type)=>{console.log(collapsed,type);}}
           >
             <div className="logo">
               <img style={{ height: 80 }} src={logo} alt="" />
             </div>
           </Sider>
-        </Layout>
-        <Layout style={{ marginLeft: 200 }}>
+        
+        <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
             <Login 
               userLogin={this.userLoggedIn} 
               userLogout={this.userLoggedOut}
               currentUser={currentUser} />
           </Header>
-          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>
+          <Content style={{ margin: '24px 16px 0' }}>
+            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               {body}
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Footer</Footer>
+        </Layout>
         </Layout>
       </div>
     );
