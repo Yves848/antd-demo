@@ -15,12 +15,12 @@ class LoginDialog extends Component {
   }
 
   handleOk= (user,psw) => {    
-    console.log('FORM CLOSED','OK', user, psw)
+    //console.log('FORM CLOSED','OK', user, psw)
     this.props.validModal(user,psw);
   }
 
   handleCancel = () => {
-    console.log('FORM CLOSED','CANCEL')
+    //console.log('FORM CLOSED','CANCEL')
     this.props.cancelModal();
   }
 

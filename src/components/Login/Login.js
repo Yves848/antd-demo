@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { db } from '../../libs/firebase';
 
-import { Menu, Dropdown, Icon } from 'antd';
+import { Menu, Dropdown, Icon, notification } from 'antd';
 import Aux from '../../hoc/_Aux';
 import './Login.css';
 import LoginDialog from './LoginDialog'
+
+const loginError = (type, msg) => {
+  notification[type]({
+    message: 'Error d\'identification',
+    description: msg,
+  });
+};
+
+const loginSuccess = (type,user) => {
+  notification[type]({
+    message: 'Connexion',
+    description: 'Bienvenue '+user,
+  });
+};
 
 class Login extends Component {
   constructor(props) {
@@ -27,7 +41,7 @@ class Login extends Component {
           {
             key: i,
             Nom: snap[i].Nom,
-            Password: snap[i].Password
+            Password: snap[i].Infos.Password
           }
         )
       });
@@ -59,11 +73,23 @@ class Login extends Component {
     const currentUser = this.state.users.filter((_user) => {
       return (_user.Nom === user);
     })
-    //console.log(currentUser)
-    if (currentUser) {
-      this.props.userLogin(currentUser[0]);
+    console.log(currentUser)
+    if (currentUser.length > 0) {
+      if (currentUser[0].Password === psw) {
+        loginSuccess('success',user)
+        this.props.userLogin(currentUser[0]);
+        this.setState({loginFormVisible: false})
+      }
+      else {
+        const msg = 'Mot de passe incorrect';
+        loginError('error', msg)
+      }
     }
-    this.setState({loginFormVisible: false})
+    else {
+      const msg = 'Utilisateur inconnu';
+      loginError('error', msg)
+    }
+    
   }
 
   onItemHover = () => {};

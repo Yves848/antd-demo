@@ -17,7 +17,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null
+      currentUser: null,
+      maxCols : 4,
+      broken: false
     };
   }
 
@@ -35,6 +37,16 @@ class App extends Component {
     });
   };
 
+  updateDisplay = (collapsed,type) => {
+    if (this.state.broken) {
+      this.setState({maxCols : 2})
+    }
+    else {
+      this.setState({maxCols : 5})
+    }
+    
+  }
+
   render() {
     let body = <h1>Pas d'utilisateur connecté</h1>;
     
@@ -43,7 +55,7 @@ class App extends Component {
     if (currentUser.Nom !== 'Utilisateur') {
       body = (
         <div>
-          <Plats user={this.state.currentUser.key} />
+          <Plats user={this.state.currentUser.key} maxCols={this.state.maxCols}/>
         </div>
       );
     }
@@ -55,8 +67,8 @@ class App extends Component {
             collapsible
             
             collapsedWidth="0"
-            onBreakpoint={(broken)=>{console.log(broken)}}
-            onCollapse={(collapsed,type)=>{console.log(collapsed,type);}}
+            onBreakpoint={(broken)=>{this.setState({broken:broken})}}
+            onCollapse={(collapsed,type)=>{this.updateDisplay(collapsed,type);}}
           >
             <div className="logo">
               <img style={{ height: 80 }} src={logo} alt="" />
