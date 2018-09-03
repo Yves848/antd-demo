@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 //import Layout from './layout/Layout'
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import Login from './components/Login/Login';
 import Plats from './components/Plats/Plats';
-import logo from './assets/images/icon.png';
+import logo from './assets/images/icon.jpg';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -73,6 +73,25 @@ class App extends Component {
             <div className="logo">
               <img style={{ height: 80 }} src={logo} alt="" />
             </div>
+            <Menu
+              defaultSelectedKeys={['1']}
+              mode="inline"
+              theme="dark"
+              inlineCollapsed="false"
+            >
+              <Menu.Item key="1">
+                <Icon type="pie-chart" />
+                <span>Programmes</span>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Icon type="desktop" />
+                <span>Menus</span>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Icon type="inbox" />
+                <span>Plats</span>
+              </Menu.Item>
+            </Menu>
           </Sider>
         
         <Layout>
@@ -87,7 +106,7 @@ class App extends Component {
               {body}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Footer</Footer>
+          <Footer style={{ textAlign: 'center' }}></Footer>
         </Layout>
         </Layout>
       </div>
