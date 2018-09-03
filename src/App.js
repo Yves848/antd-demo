@@ -6,6 +6,10 @@ import { Layout, Menu, Icon } from 'antd';
 import Login from './components/Login/Login';
 import Plats from './components/Plats/Plats';
 import logo from './assets/images/icon.jpg';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import * as routes from './Routes/Routes';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -61,6 +65,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+      <Router>
         <Layout>
           <Sider
             breakpoint='md'
@@ -109,7 +114,10 @@ class App extends Component {
           <Footer style={{ textAlign: 'center' }}></Footer>
         </Layout>
         </Layout>
+        </Router>
       </div>
+
+      
     );
   }
 }
